@@ -135,3 +135,188 @@ body { background-color: #1a1a1a; display: flex; justify-content: center; align-
     border-right: 0;
   }
 }
+
+/* Split-screen login untuk layar lebar */
+@media (min-width: 700px) {
+  .login-screen {
+    background:
+      radial-gradient(ellipse at 18% 80%, rgba(14, 165, 233, .45), transparent 40%),
+      linear-gradient(125deg, #082f49, #0f172a 58%, #164e63);
+  }
+
+  .login-card {
+    width: min(920px, calc(100vw - 64px));
+    max-width: none;
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, .8fr);
+    gap: 12px 64px;
+    align-items: center;
+    padding: 48px;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .login-logo,
+  .login-company,
+  .login-title,
+  .login-sub {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .login-logo {
+    grid-row: 1;
+    margin: 0;
+  }
+
+  .login-company { grid-row: 2; color: #bae6fd; }
+  .login-title {
+    grid-row: 3;
+    color: #fff;
+    font-size: 32px;
+    text-align: left;
+  }
+  .login-title::before {
+    content: "Selamat datang kembali";
+    display: block;
+    margin-bottom: 10px;
+    font-size: 36px;
+  }
+  .login-sub {
+    grid-row: 4;
+    color: #dbeafe;
+    text-align: left;
+  }
+
+  .login-card form {
+    grid-column: 2;
+    grid-row: 1 / 5;
+    padding: 30px;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, .28);
+  }
+
+  .login-card form::before {
+    content: "Masuk";
+    margin-bottom: 12px;
+    color: #0f172a;
+    font-size: 25px;
+    font-weight: 800;
+  }
+}
+
+/* Login ponsel: latar teal dan panel gelap */
+@media (max-width: 699px) {
+  .login-screen {
+    background:
+      radial-gradient(ellipse at 50% 45%, rgba(119, 205, 200, .55), transparent 65%),
+      linear-gradient(145deg, #164e55, #28777b 55%, #123e48);
+  }
+
+  .login-card {
+    width: min(330px, calc(100vw - 36px));
+    max-width: none;
+    gap: 8px;
+    padding: 22px 18px;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .login-logo {
+    width: 76px;
+    height: 70px;
+    margin: 0 0 4px;
+  }
+
+  .login-company {
+    color: #d3eeee;
+    letter-spacing: 3px;
+  }
+
+  .login-title {
+    margin: 6px 0 2px;
+    color: #e7f4f4;
+    font-size: 0;
+    letter-spacing: 2px;
+  }
+
+  .login-title::after {
+    content: "USER LOGIN";
+    font-size: 17px;
+  }
+
+  .login-sub {
+    color: #c2dddd;
+    margin: 0 0 10px;
+  }
+
+  .login-card form {
+    gap: 12px;
+    padding: 18px;
+    border: 1px solid rgba(210, 245, 245, .12);
+    border-radius: 3px;
+    background: rgba(3, 29, 34, .88);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, .22);
+  }
+
+  .login-field label {
+    color: #d4e5e5;
+  }
+
+  .login-field input {
+    border: 0;
+    border-radius: 2px;
+    background: rgba(235, 242, 242, .88);
+  }
+
+  .login-remember {
+    color: #d4e5e5;
+  }
+
+  .login-btn {
+    border: 0;
+    border-radius: 2px;
+    background: #4d8990;
+  }
+}
+
+/* Login desktop/tablet: panel kaca transparan */
+@media (min-width: 700px) {
+  .login-screen {
+    background:
+      radial-gradient(ellipse at 18% 80%, rgba(64, 170, 175, .48), transparent 42%),
+      linear-gradient(125deg, #123f48, #102d3a 58%, #174e5b);
+  }
+
+  .login-card form {
+    border: 1px solid rgba(255, 255, 255, .35);
+    background: rgba(255, 255, 255, .18);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, .24);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .login-card form::before {
+    color: #fff;
+  }
+
+  .login-field label,
+  .login-remember {
+    color: #fff;
+  }
+
+  .login-field input {
+    background: rgba(255, 255, 255, .9);
+  }
+}
+
+/* Latar belakang login menggunakan gambar pantai dengan lapisan gelap transparan */
+.login-screen {
+  background-image:
+    linear-gradient(rgba(5, 25, 38, .42), rgba(5, 25, 38, .58)),
+    url("../img/login-beach.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

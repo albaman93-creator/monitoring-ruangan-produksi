@@ -122,4 +122,16 @@
   #mainContent > .btn-submit {
     grid-column: 1 / -1;
   }
+
+  #mainContent > #sheetsContainer {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
+  }
+
+  #sheetsContainer .sheet-card,
+  #sheetsContainer .sheet-scroll {
+    width: 100%;
+    min-width: 0;
+  }
 }
