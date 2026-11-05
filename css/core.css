@@ -71,3 +71,67 @@ body { background-color: #1a1a1a; display: flex; justify-content: center; align-
 .login-error { min-height: 14px; font-size: 11px; font-weight: 700; color: #b91c1c; text-align: center; }
 .login-btn { padding: 13px; border: 1px solid #01579b; border-radius: 8px; background: linear-gradient(to bottom, #29b6f6 0%, #0288d1 50%, #01579b 100%); color: #fff; font-size: 14px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; }
 .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Tablet: tampilan seperti ponsel, memenuhi layar */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .phone-frame {
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    border: none;
+    border-radius: 0;
+  }
+
+  .notch {
+    display: none;
+  }
+
+  .app-content {
+    padding-top: 14px;
+  }
+}
+
+/* Desktop: navigasi vertikal di kiri */
+@media (min-width: 1025px) {
+  body {
+    min-height: 100vh;
+    align-items: stretch;
+  }
+
+  .phone-frame {
+    width: 100%;
+    max-width: none;
+    height: 100vh;
+    max-height: none;
+    border: none;
+    border-radius: 0;
+  }
+
+  .notch {
+    display: none;
+  }
+
+  .app-content {
+    padding: 24px 24px 24px 104px;
+  }
+
+  .bottom-nav {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    z-index: 10;
+  }
+
+  .nav-item {
+    flex: none;
+    width: 100%;
+    min-height: 68px;
+    border-right: 0;
+  }
+}

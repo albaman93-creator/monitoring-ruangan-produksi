@@ -50,13 +50,13 @@ function renderInputForms(tabGroupName) {
     formCard.id = 'card_' + item.no;
     formCard.innerHTML =
       '<div class="form-header">' +
-        '<div class="fh-left"><span class="fh-no">' + item.no + '</span><div class="fh-text"><span class="fh-id">' + item.id + '</span><span class="fh-area">' + areaLabel + '</span></div></div>' +
+        '<div class="fh-left"><span class="fh-no">' + item.no + '</span><div class="fh-text"><span class="fh-id">' + item.mon + '</span><span class="fh-area">' + areaLabel + '</span></div></div>' +
         '<div class="fh-right"><span class="off-chip" id="offchip_' + item.no + '"><i class="fas fa-moon"></i> OFF</span><span class="saved-chip" id="chip_' + item.no + '" style="display:none;">✔ Tersimpan</span></div>' +
       '</div>' +
       '<div class="form-body">' +
         '<div class="location-info">' +
           '<p><i class="fas fa-map-marker-alt"></i> ' + item.nama + '</p>' +
-          '<p><i class="fas fa-exchange-alt"></i> ' + item.mon + '</p>' +
+          '<p><i class="fas fa-tag"></i> ' + item.id + '</p>' +
         '</div>' +
         '<div class="input-grid" style="grid-template-columns: repeat(' + colCount + ', 1fr);">' + inputHtml + '</div>' +
         '<div class="off-note"><i class="fas fa-circle-info"></i> Hari libur — tidak ada pengukuran. Pada grafik hari ini akan terputus dan ditandai abu-abu.</div>' +

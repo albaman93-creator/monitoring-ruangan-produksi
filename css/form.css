@@ -33,10 +33,10 @@
 .logsheet-table td.row-label { text-align: left; font-weight: 700; background: #f1f5f9; color: #0f172a; position: sticky; left: 0; min-width: 90px; }
 .empty-note { font-size: 10.5px; font-weight: 700; color: #854d0e; background: #fef9c3; border: 1px solid #fde047; border-radius: 6px; padding: 6px 8px; margin-top: 2px; }
 .theme-light .control-card { background: #ffffff; border: 1px solid #cbe2ef; }
-.theme-light .form-card { background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border: 1px solid #d0e3f0; }
+.theme-light .form-card { background: #2d3b4d; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border: 1px solid #d0e3f0; }
 .theme-light .form-header { background: linear-gradient(to bottom, #29b6f6 0%, #0288d1 50%, #01579b 100%); color: white; }
 .theme-light .location-info { border-bottom: 1px dashed #cbe2ef; }
-.theme-light .location-info p { color: #475569; }
+.theme-light .location-info p { color: #000000; }
 .theme-light .location-info p i { color: #0288d1; }
 .theme-light .input-group label { color: #0277bd; }
 .theme-light .input-field { border: 2px solid #cbe2ef; background-color: #f8fbfe; color: #334155; }
@@ -56,6 +56,7 @@
 .fh-text { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
 .fh-id { font-size: 14px; font-weight: 800; letter-spacing: .3px; }
 .fh-area { font-size: 10px; opacity: .85; font-weight: 600; }
+.form-header .fh-id, .form-header .fh-area { color: #000; }
 .fh-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 .form-header .saved-chip { margin-left: 0; font-size: 9.5px; }
 .off-chip { font-size: 9.5px; background: #475569; color: #fff; padding: 2px 8px; border-radius: 10px; font-weight: 800; letter-spacing: .5px; display: none; }
@@ -101,3 +102,24 @@
 .theme-dark .off-note { background: rgba(100,116,139,0.25); color: #cbd5e1; border-color: #64748b; }
 .theme-dark .ctrl-group select option { background: #0f172a; color: #fff; }
 .theme-dark .ctrl-group input, .theme-dark .ctrl-group select { background: rgba(0,0,0,0.35); border-color: rgba(56,189,248,0.35); color: #fff; }
+
+/* FORM INPUT (dipakai bersama Line 1 / Line 2 / Logistic / Loker): panel kontrol, kartu input, catatan/OFF */
+.theme-light .input-group label,
+.theme-light .spec-hint,
+.theme-light .note-label {
+  color: #fffcfc;
+}
+
+/* Desktop: empat kartu per baris */
+@media (min-width: 1025px) {
+  #mainContent {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  #mainContent > :first-child,
+  #mainContent > .btn-submit {
+    grid-column: 1 / -1;
+  }
+}
