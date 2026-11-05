@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Input Monitoring Ruangan</title>
+<link rel="icon" href="img/logo.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="css/core.css">
+<link rel="stylesheet" href="css/master.css">
+<link rel="stylesheet" href="css/form.css">
+<link rel="stylesheet" href="css/line1.css">
+<link rel="stylesheet" href="css/line2.css">
+<link rel="stylesheet" href="css/logistic.css">
+<link rel="stylesheet" href="css/loker.css">
+<link rel="stylesheet" href="css/grafik.css">
+</head>
+<body>
+
+<div class="phone-frame theme-light" id="appFrame">
+  <div class="notch"></div>
+
+  <!-- HALAMAN LOGIN -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <div class="login-logo">
+        <img alt="Logo FIMA" class="company-logo">
+      </div>
+      <div class="login-company">PT FIMA</div>
+      <div class="login-title">FORM INPUT MONITORING RUANGAN</div>
+      <div class="login-sub">Silakan masuk untuk melanjutkan</div>
+      <form onsubmit="prosesLogin(event)" novalidate>
+        <div class="login-field" id="loginUrlRow" style="display:none;">
+          <label>URL WEB APP (APPS SCRIPT, BERAKHIRAN /exec)</label>
+          <input type="text" id="loginUrl" autocomplete="off" placeholder="https://script.google.com/macros/s/.../exec">
+        </div>
+        <div class="login-field">
+          <label>PASSWORD</label>
+          <div class="pw-wrap">
+            <input type="password" id="loginPw" name="fima-pw" autocomplete="current-password" placeholder="Masukkan password">
+            <button type="button" class="pw-toggle" onclick="togglePw()"><i class="fas fa-eye" id="pwIcon"></i></button>
+          </div>
+        </div>
+        <label class="login-remember"><input type="checkbox" id="loginRemember"> Ingat di perangkat ini</label>
+        <div class="login-error" id="loginError"></div>
+        <button type="submit" class="login-btn" id="btnLogin"><i class="fas fa-right-to-bracket"></i> MASUK</button>
+      </form>
+    </div>
+  </div>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <div class="sidebar" id="sidebar">
+    <h3>Pengaturan Tema</h3>
+    <button class="theme-btn active-theme" id="btnLight" onclick="setTheme('theme-light')"><i class="fas fa-sun"></i> Light Mode</button>
+    <button class="theme-btn" id="btnDark" onclick="setTheme('theme-dark')"><i class="fas fa-moon"></i> Dark Mode</button>
+
+    <h3 style="margin-top:10px;">Database &amp; Pengaturan</h3>
+    <button class="theme-btn" onclick="bukaModalMaster(); toggleSidebar();"><i class="fas fa-plus-circle"></i> Tambah Ruangan &amp; Limit</button>
+    <button class="theme-btn" onclick="bukaModalOperator(); toggleSidebar();"><i class="fas fa-user-check"></i> Kelola Operator</button>
+    <button class="theme-btn" onclick="bukaLinkSpreadsheet(); toggleSidebar();"><i class="fas fa-table"></i> Buka Sheet &amp; Grafik</button>
+    <button class="theme-btn" id="btnApiUrl" style="display:none;" onclick="aturApiUrl(); toggleSidebar();"><i class="fas fa-link"></i> Atur URL API (Apps Script)</button>
+    <button class="theme-btn" onclick="keluarLogin('Anda sudah keluar.'); toggleSidebar();"><i class="fas fa-right-from-bracket"></i> Keluar (Logout)</button>
+  </div>
+
+  <div class="app-content" id="contentArea">
+    <div class="app-header">
+      <button class="menu-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+      <div class="logo-container">
+        <img alt="Logo FIMA" class="company-logo">
+      </div>
+      <div class="header-title" id="pageTitle">FORM INPUT MONITORING RUANGAN</div>
+    </div>
+
+    <div id="monitoringControlPanel" class="control-card" style="display:none;">
+      <div class="control-grid ctrl-top">
+        <div class="ctrl-group">
+          <label><i class="far fa-calendar-alt"></i> TANGGAL</label>
+          <input type="date" id="ctrlTanggal" onchange="cekStatusShiftArea()">
+        </div>
+        <div class="ctrl-group">
+          <label><i class="far fa-clock"></i> JAM / SHIFT</label>
+          <select id="ctrlJamShift" onchange="cekStatusShiftArea()">
+            <option value="07:00|Shift 1">07:00 (Shift 1)</option>
+            <option value="15:00|Shift 2">15:00 (Shift 2)</option>
+            <option value="23:00|Shift 3">23:00 (Shift 3)</option>
+          </select>
+        </div>
+      </div>
+      <div class="ctrl-group">
+        <label><i class="far fa-user"></i> OPERATOR (INISIAL)</label>
+        <div class="op-row">
+          <select id="ctrlOperator" onchange="onOperatorChange()"></select>
+          <button type="button" class="op-add-btn" title="Tambah / kelola operator" onclick="bukaModalOperator()"><i class="fas fa-user-plus"></i></button>
+        </div>
+      </div>
+      <div id="shiftBanner" class="shift-status-banner pending" onclick="cekStatusShiftArea()">Memeriksa status pengisian shift...</div>
+    </div>
+
+    <div id="mainContent" style="display:flex; flex-direction:column; gap:12px;"></div>
+  </div>
+
+  <div id="masterModal" class="modal-backdrop" style="display:none;">
+    <div class="modal-box">
+      <h4 id="modalTitle">Edit Master &amp; Limit Ruangan</h4>
+      <form onsubmit="simpanMasterForm(event)">
+        <input type="hidden" id="mRowIndex">
+        <input type="hidden" id="mNo">
+        <div class="modal-grid-2">
+          <div class="modal-field"><label>ID Alat Ukur</label><input type="text" id="mId" placeholder="K3081001" required></div>
+          <div class="modal-field"><label>Area</label>
+            <select id="mArea">
+              <option value="Line 1">Line 1</option>
+              <option value="Line 2">Line 2</option>
+              <option value="Logistik">Logistik</option>
+              <option value="Loker Male">Loker Male</option>
+              <option value="Loker Female">Loker Female</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-field"><label>Nama Ruang</label><input type="text" id="mNama" placeholder="Laundry 2" required></div>
+        <div class="modal-field"><label>Monitoring (Pembanding)</label><input type="text" id="mMon" placeholder="Laundry vs Corridor Class D" required></div>
+        <div class="modal-field"><label>Jenis Pengukuran</label>
+          <select id="mJenis">
+            <option value="°C, %RH, Pa">°C, %RH, Pa</option>
+            <option value="Pa">Pa (Hanya Tekanan)</option>
+          </select>
+        </div>
+        <div class="modal-field"><label>Status Kartu</label>
+          <select id="mStatus"><option value="Aktif">Aktif (tampil di form)</option><option value="Nonaktif">Nonaktif (disembunyikan)</option></select>
+        </div>
+        <div class="limit-section-title">Batas Spesifikasi / Limit Ruangan Ini:</div>
+        <div class="modal-grid-2">
+          <div class="modal-field"><label>Alert Limit DP (Pa)</label><input type="number" step="0.1" id="mAlertDP" placeholder="10"></div>
+          <div class="modal-field"><label>Action Limit DP (Pa)</label><input type="number" step="0.1" id="mActionDP" placeholder="5"></div>
+          <div class="modal-field"><label>Suhu Min (°C)</label><input type="number" step="0.1" id="mSuhuMin" placeholder="16"></div>
+          <div class="modal-field"><label>Suhu Max (°C)</label><input type="number" step="0.1" id="mSuhuMax" placeholder="25"></div>
+          <div class="modal-field"><label>RH Min (%)</label><input type="number" step="0.1" id="mRhMin" placeholder="45"></div>
+          <div class="modal-field"><label>RH Max (%)</label><input type="number" step="0.1" id="mRhMax" placeholder="65"></div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="tutupModalMaster()">Batal</button>
+          <button type="submit" class="btn-save-modal">Simpan Limit &amp; Data</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="operatorModal" class="modal-backdrop" style="display:none;">
+    <div class="modal-box">
+      <h4><i class="fas fa-user-check"></i> Kelola Operator</h4>
+      <div class="limit-section-title" style="border-top:none; margin-top:2px; padding-top:0;">Daftar Operator</div>
+      <div class="op-list" id="opList"></div>
+      <div class="limit-section-title">Tambah Operator Baru</div>
+      <form onsubmit="simpanOperatorBaru(event)">
+        <div class="modal-grid-2">
+          <div class="modal-field"><label>Inisial</label><input type="text" id="opInisial" maxlength="8" placeholder="AB" style="text-transform:uppercase;" required></div>
+          <div class="modal-field"><label>Nama (opsional)</label><input type="text" id="opNama" maxlength="40" placeholder="Nama lengkap"></div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="tutupModalOperator()">Tutup</button>
+          <button type="submit" class="btn-save-modal" id="btnSimpanOp"><i class="fas fa-plus"></i> Tambah</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toastMsg" class="toast-msg"></div>
+
+  <nav class="bottom-nav" id="bottomNav">
+    <div class="nav-item active" id="nav-Master" onclick="switchTab('Master', this)"><i class="fas fa-database"></i><span>Master</span></div>
+    <div class="nav-item" id="nav-Line1" onclick="switchTab('Line 1', this)"><i class="fas fa-industry"></i><span>Line 1</span></div>
+    <div class="nav-item" id="nav-Line2" onclick="switchTab('Line 2', this)"><i class="fas fa-cogs"></i><span>Line 2</span></div>
+    <div class="nav-item" id="nav-Logistic" onclick="switchTab('Logistic', this)"><i class="fas fa-truck"></i><span>Logistic</span></div>
+    <div class="nav-item" id="nav-Loker" onclick="switchTab('Loker', this)"><i class="fas fa-box-archive"></i><span>Loker</span></div>
+    <div class="nav-item" id="nav-Grafik" onclick="switchTab('Grafik', this)"><i class="fas fa-chart-line"></i><span>Grafik</span></div>
+  </nav>
+</div>
+<script src="js/core.js"></script>
+<script src="js/master.js"></script>
+<script src="js/form.js"></script>
+<script src="js/line1.js"></script>
+<script src="js/line2.js"></script>
+<script src="js/logistic.js"></script>
+<script src="js/loker.js"></script>
+<script src="js/grafik.js"></script>
+</body>
+</html>

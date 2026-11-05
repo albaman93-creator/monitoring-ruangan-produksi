@@ -1,0 +1,5 @@
+/* LINE 1: styling khusus tab Line 1.
+   Style dasar kartu ada di form.css. Tiap kartu otomatis diberi atribut data-tab="Line 1",
+   jadi cukup tulis override di sini, contoh:
+   .form-card[data-tab="Line 1"] .form-header { ... }
+*/

@@ -1,0 +1,5 @@
+/* LOGISTIC: styling khusus tab Logistic.
+   Style dasar kartu ada di form.css. Tiap kartu otomatis diberi atribut data-tab="Logistic",
+   jadi cukup tulis override di sini, contoh:
+   .form-card[data-tab="Logistic"] .form-header { ... }
+*/

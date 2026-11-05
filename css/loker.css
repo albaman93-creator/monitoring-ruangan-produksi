@@ -1,0 +1,5 @@
+/* LOKER: styling khusus tab Loker.
+   Style dasar kartu ada di form.css. Tiap kartu otomatis diberi atribut data-tab="Loker",
+   jadi cukup tulis override di sini, contoh:
+   .form-card[data-tab="Loker"] .form-header { ... }
+*/
