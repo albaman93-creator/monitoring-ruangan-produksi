@@ -135,3 +135,121 @@
     min-width: 0;
   }
 }
+
+/* Tampilan kaca transparan untuk form input */
+.theme-light {
+  --form-glass: rgba(255, 255, 255, .42);
+  --form-border: rgba(255, 255, 255, .68);
+  --form-text: #17324d;
+  --form-label: #075985;
+  --form-input-bg: rgba(255, 255, 255, .58);
+  --form-input-border: rgba(255, 255, 255, .78);
+}
+
+.theme-dark {
+  --form-glass: rgba(15, 23, 42, .48);
+  --form-border: rgba(255, 255, 255, .2);
+  --form-text: #e2e8f0;
+  --form-label: #7dd3fc;
+  --form-input-bg: rgba(2, 6, 23, .42);
+  --form-input-border: rgba(255, 255, 255, .2);
+}
+
+.theme-light .control-card,
+.theme-light .form-card,
+.theme-dark .control-card,
+.theme-dark .form-card {
+  background: var(--form-glass);
+  border: 1px solid var(--form-border);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, .16),
+              inset 0 1px rgba(255, 255, 255, .3);
+  color: var(--form-text);
+}
+
+.theme-light .location-info,
+.theme-dark .location-info {
+  background: rgba(255, 255, 255, .3);
+}
+
+.theme-light .location-info p,
+.theme-dark .location-info p {
+  color: var(--form-text);
+}
+
+.theme-light .input-group label,
+.theme-light .note-label,
+.theme-light .ctrl-group label,
+.theme-dark .input-group label,
+.theme-dark .note-label,
+.theme-dark .ctrl-group label {
+  color: var(--form-label);
+}
+
+.theme-light .spec-hint { color: #475569; }
+.theme-dark .spec-hint { color: #cbd5e1; }
+
+.theme-light .input-field:not(.val-ok):not(.val-alert):not(.val-action),
+.theme-light .note-select,
+.theme-light .note-text,
+.theme-light .ctrl-group input,
+.theme-light .ctrl-group select,
+.theme-dark .input-field:not(.val-ok):not(.val-alert):not(.val-action),
+.theme-dark .note-select,
+.theme-dark .note-text,
+.theme-dark .ctrl-group input,
+.theme-dark .ctrl-group select {
+  background-color: var(--form-input-bg);
+  border: 1px solid var(--form-input-border);
+  color: var(--form-text);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* Teks header tetap kontras di atas gradasi biru */
+.theme-light .form-header .fh-id,
+.theme-light .form-header .fh-area,
+.theme-dark .form-header .fh-id,
+.theme-dark .form-header .fh-area {
+  color: #fff;
+}
+
+/* --- Tampilan Hybrid Baru (Light Theme) --- */
+.theme-light {
+  --form-glass: rgba(255, 255, 255, .82);
+  --form-border: rgba(255, 255, 255, .88);
+  --form-text: #17324d;
+  --form-label: #075985;
+  --form-input-bg: rgba(255, 255, 255, .9);
+  --form-input-border: rgba(125, 180, 220, .55);
+}
+
+.theme-light .form-card,
+.theme-light .control-card {
+  border-radius: 18px;
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 0 10px 28px rgba(15, 50, 80, .12);
+}
+
+.theme-light .location-info {
+  background: rgba(255, 255, 255, .58);
+  border: 1px solid rgba(255, 255, 255, .75);
+}
+
+.theme-light .input-group {
+  padding: 8px 6px 6px;
+  border: 1px solid rgba(125, 180, 220, .42);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, .48);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.theme-light .input-field:not(.val-ok):not(.val-alert):not(.val-action),
+.theme-light .note-select,
+.theme-light .note-text {
+  background-color: var(--form-input-bg);
+  border-color: var(--form-input-border);
+}

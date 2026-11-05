@@ -320,3 +320,74 @@ body { background-color: #1a1a1a; display: flex; justify-content: center; align-
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+@media (max-width: 699px) {
+  .login-card form {
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .18);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, .24);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .login-field label,
+  .login-remember {
+    color: #fff;
+  }
+
+  .login-field input {
+    background: rgba(255, 255, 255, .9);
+  }
+}
+
+@media (max-width: 699px) {
+  .login-company,
+  .login-title,
+  .login-sub,
+  .login-field label,
+  .login-error {
+    width: 100%;
+    text-align: center;
+  }
+
+  .login-remember {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .login-card > .login-title {
+    align-self: stretch;
+    text-align: center;
+  }
+
+  .login-card > .login-title::after {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.login-company {
+  display: none;
+}
+
+@media (min-width: 700px) {
+  .login-title::before {
+    content: none;
+    display: none;
+  }
+
+  .login-title {
+    grid-row: 2;
+  }
+
+  .login-sub {
+    grid-row: 3;
+  }
+
+  .login-card form {
+    grid-row: 1 / 4;
+  }
+}
